@@ -4,8 +4,6 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 
-
-
  function App() {
  let [spriteBack, setSpriteBack] = useState('');
  let [name, setName] = useState('');
@@ -34,20 +32,12 @@ import './App.css'
      
   }
   
-
-  function displayArray()
-  {
-    console.log(pokemonArray);
-
-  }
 getPokemon();
 
   return (
     <>
     <div className='card'>
-    <img src={pokemonArray[0]}></img>
-    <button onClick={displayArray}></button>
-   
+    <img src={pokemon.spriteBack}></img>
     </div>
     </>
   )
