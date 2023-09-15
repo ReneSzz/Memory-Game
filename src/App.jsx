@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -18,21 +18,36 @@ import './App.css'
   {
     
      try{
-     let response = await fetch(`https://pokeapi.co/api/v2/pokemon/3`);
-     let result = await response.json();
-      setSpriteBack(result.sprites.front_default);
-      setName(result.forms[0].name);
-      setPokemon({spriteBack,name});
+      let response = await fetch(`https://pokeapi.co/api/v2/pokemon/3`);
+      let result = await response.json();
+        
+
+
+
+        setSpriteBack(result.sprites.front_default);
+        setName(result.forms[0].name);
+        setPokemon({spriteBack,name});
+        setPokemonArray([...pokemonArray, pokemon])
+        console.log(pokemonArray);
+   
      }
+   
      catch
      {
         console.log("error");
+       
       
      }
      
   }
-  
-getPokemon();
+
+
+
+  useEffect(() => {getPokemon()});
+
+
+
+
 
   return (
     <>
