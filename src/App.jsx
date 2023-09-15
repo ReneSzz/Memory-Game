@@ -41,7 +41,7 @@ const URL = `https://pokeapi.co/api/v2/pokemon/3`
 
  
 useEffect(() => {
-getPokemon().then(json => setPokemonArray([pokemonArray,json]));
+getPokemon().then(json => setPokemonArray([...pokemonArray,json]));
 }, []);
 
 function Log()
