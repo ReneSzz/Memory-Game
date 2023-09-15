@@ -20,34 +20,26 @@ import './App.css'
      try{
       let response = await fetch(`https://pokeapi.co/api/v2/pokemon/3`);
       let result = await response.json();
-        
-
-
-
-        setSpriteBack(result.sprites.front_default);
-        setName(result.forms[0].name);
-        setPokemon({spriteBack,name});
-        setPokemonArray([...pokemonArray, pokemon])
-        console.log(pokemonArray);
-   
-     }
-   
-     catch
-     {
-        console.log("error");
-       
+      setSpriteBack(result.sprites.front_default);
+      setName(result.forms[0].name);
+      setPokemon({spriteBack,name});
+     // console.log(pokemonArray);
       
+   
      }
-     
+     catch {console.log("error");}
+    
+      
   }
 
 
 
-  useEffect(() => {getPokemon()});
+ 
 
 
 
 
+getPokemon(); 
 
   return (
     <>
