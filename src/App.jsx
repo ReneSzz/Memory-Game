@@ -10,64 +10,55 @@ const URL = `https://pokeapi.co/api/v2/pokemon/3`
  let [spriteBack, setSpriteBack] = useState('');
  let [name, setName] = useState('');
  let [pokemonArray, setPokemonArray] = useState([]);
- let [pokemon, setPokemon] = useState({spriteBack: '', pokemonName:''});
+ let [pokemon, setPokemon] = useState(null);
  const [results, setResults] = useState([]);
  const controller = new AbortController;
  
 
- function Pokemon({ name,sprite, props }) {
+ function Pokemon({name, id, sprite, props }) {
   return <> 
   
-<h1 {...props}>{name}</h1>;
+<h1 {...props}>{name}</h1>
+<h2> {id}</h2>
 <img src={sprite}></img>
 
 </>
 }
 
 
-
-
    async function getPokemon()
    {
-     
       let response = await fetch(URL);
       if (response.ok){
         return await response.json();
       } else {
         return Promise.reject();
       }
-    
   }
 
  
 useEffect(() => {
-getPokemon().then(json => setPokemonArray([...pokemonArray,json]));
+getPokemon().then(json => setPokemon(json));
 }, []);
 
-function Log()
-{
-  console.log(pokemonArray);
-}
   // setResults(result);
   // setSpriteBack(result.sprites.front_default);
   // setName(result.forms[0].name);
   // setPokemon({spriteBack,name})
 
   return (
-    <>
     <div>
-      <button type="button" onClick={() => Log()}> Next </button>
+    <button type="button" onClick={() => setIndex(index + 1)}>
+      Next
+    </button>
 
-      {/* {pokemonArray ? (
-        <Pokemon name={pokemonArray[0].name} sprite={pokemonArray[0].sprites.front_default} />
-      ) : (
-
-        <div> no pokemon for {index}</div>
-      )} */}
-    </div>
-   
-    </>
-  )
+    {pokemon ? (
+      <Pokemon name={pokemon.name} id={pokemon.id} sprite={pokemon.sprites.front_default}/>
+    ) : (
+      <div>no pokemon for {index}</div>
+    )}
+  </div>
+);
 }
 
 export default App
