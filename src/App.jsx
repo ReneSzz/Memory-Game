@@ -41,9 +41,13 @@ const URL = `https://pokeapi.co/api/v2/pokemon/3`
 
  
 useEffect(() => {
-getPokemon().then(json => setPokemon(json));
-});
+getPokemon().then(json => setPokemonArray([pokemonArray,json]));
+}, []);
 
+function Log()
+{
+  console.log(pokemonArray);
+}
   // setResults(result);
   // setSpriteBack(result.sprites.front_default);
   // setName(result.forms[0].name);
@@ -52,14 +56,14 @@ getPokemon().then(json => setPokemon(json));
   return (
     <>
     <div>
-      <button type="button" onClick={()=> setIndex(index + 1)}> Next </button>
+      <button type="button" onClick={() => Log()}> Next </button>
 
-      {pokemon ? (
-        <Pokemon name={pokemon.name} sprite={pokemon.sprites.front_default} />
+      {/* {pokemonArray ? (
+        <Pokemon name={pokemonArray[0].name} sprite={pokemonArray[0].sprites.front_default} />
       ) : (
 
         <div> no pokemon for {index}</div>
-      )}
+      )} */}
     </div>
    
     </>
