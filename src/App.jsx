@@ -15,20 +15,38 @@ const URL = `https://pokeapi.co/api/v2/pokemon/3`
  const controller = new AbortController;
  
 
- function Pokemon({name, id, sprite, props }) {
+function PokemonBuilder(name,id,sprite, props)
+{
   return <> 
-  
-<h1 {...props}>{name}</h1>
+   <h1 {...props}>{name}</h1>
 <h2> {id}</h2>
-<img src={sprite}></img>
+<img src={sprite}></img> 
+  </>
+}
 
-</>
+ function Pokemon({array, props }) {
+
+  // array.map((pokemon) => {
+  //   console.log(pokemon)
+  //   console.log(pokemon.id)
+    
+    
+  // })
+  return( 
+    <> 
+    
+    <h1>{pokemon.name}</h1>
+    <img src={pokemon.sprites.front_default}></img>
+    
+    </>
+      );
 }
 
 
-   async function getPokemon()
+   async function getPokemon(id = 4)
    {
-      let response = await fetch(URL);
+     
+      let response = await fetch(`https://pokeapi.co/api/v2/pokemon/`+ id);
       if (response.ok){
         return await response.json();
       } else {
@@ -36,24 +54,31 @@ const URL = `https://pokeapi.co/api/v2/pokemon/3`
       }
   }
 
+function fillArray(){ 
+  
+  getPokemon().then(json => setPokemonArray(prevState => ([...prevState, json])));   
+  getPokemon(5).then(json => setPokemonArray(prevState => ([...prevState, json])));  
+  getPokemon(6).then(json => setPokemonArray(prevState => ([...prevState, json])));  
+  getPokemon(6).then(json => setPokemon(json));
  
-useEffect(() => {
-getPokemon().then(json => setPokemon(json));
-}, []);
 
-  // setResults(result);
-  // setSpriteBack(result.sprites.front_default);
-  // setName(result.forms[0].name);
-  // setPokemon({spriteBack,name})
+}
+
+
+
+
 
   return (
     <div>
-    <button type="button" onClick={() => setIndex(index + 1)}>
+    <button type="button" onClick={() => console.log(pokemonArray)}>
       Next
+    </button>
+    <button type="button" onClick={() => fillArray()}>
+      fill
     </button>
 
     {pokemon ? (
-      <Pokemon name={pokemon.name} id={pokemon.id} sprite={pokemon.sprites.front_default}/>
+      <Pokemon array={pokemonArray}/>
     ) : (
       <div>no pokemon for {index}</div>
     )}
