@@ -34,9 +34,22 @@ function PokemonBuilder(name,id,sprite, props)
   // })
   return( 
     <> 
-    
-    <h1>{pokemon.name}</h1>
-    <img src={pokemon.sprites.front_default}></img>
+    <div> 
+      {array.map((pokemon) =>{
+        return <>
+      
+        <img src={pokemon.sprites.front_default}></img>
+
+        </>
+      }
+      )}
+
+
+    {/* <h1>{pokemon.name}</h1>
+    <img src={pokemon.sprites.front_default}></img> */}
+
+    </div>
+  
     
     </>
       );
@@ -56,9 +69,15 @@ function PokemonBuilder(name,id,sprite, props)
 
 function fillArray(){ 
   
-  getPokemon().then(json => setPokemonArray(prevState => ([...prevState, json])));   
-  getPokemon(5).then(json => setPokemonArray(prevState => ([...prevState, json])));  
-  getPokemon(6).then(json => setPokemonArray(prevState => ([...prevState, json])));  
+
+  for(let i = 1; i < 5; i++)
+  {
+    getPokemon(i).then(json => setPokemonArray(prevState => ([...prevState, json])));   
+
+  }
+  // getPokemon().then(json => setPokemonArray(prevState => ([...prevState, json])));   
+  // getPokemon(5).then(json => setPokemonArray(prevState => ([...prevState, json])));  
+  // getPokemon(6).then(json => setPokemonArray(prevState => ([...prevState, json])));  
   getPokemon(6).then(json => setPokemon(json));
  
 
