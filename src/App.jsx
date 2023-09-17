@@ -37,8 +37,9 @@ function PokemonBuilder(name,id,sprite, props)
     <div> 
       {array.map((pokemon) =>{
         return <>
-      
+        <div className='card'>
         <img src={pokemon.sprites.front_default}></img>
+        </div>
 
         </>
       }
