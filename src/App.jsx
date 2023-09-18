@@ -73,7 +73,9 @@ function fillArray(){
 
   for(let i = 1; i < 5; i++)
   {
-    getPokemon(i).then(json => setPokemonArray(prevState => ([...prevState, json])));   
+
+    let randomId = Math.floor(Math.random() * 155 - 1 + 1)
+    getPokemon(randomId).then(json => setPokemonArray(prevState => ([...prevState, json])));   
 
   }
   // getPokemon().then(json => setPokemonArray(prevState => ([...prevState, json])));   
