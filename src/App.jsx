@@ -36,12 +36,12 @@ function PokemonBuilder(name,id,sprite, props)
     <> 
     <div> 
       {array.map((pokemon) =>{
-        return <>
-        <div className='card'>
+        return <div className='card'>
+        
         <img src={pokemon.sprites.front_default}></img>
         </div>
 
-        </>
+       
       }
       )}
 
@@ -74,7 +74,7 @@ function fillArray(){
   for(let i = 1; i < 5; i++)
   {
 
-    let randomId = Math.floor(Math.random() * 155 - 1 + 1)
+    let randomId = Math.floor(Math.random() * 151 - 1 + 1)
     getPokemon(randomId).then(json => setPokemonArray(prevState => ([...prevState, json])));   
 
   }
@@ -91,7 +91,7 @@ function fillArray(){
 
 
   return (
-    <div>
+  <>
     <button type="button" onClick={() => console.log(pokemonArray)}>
       Next
     </button>
@@ -99,12 +99,15 @@ function fillArray(){
       fill
     </button>
 
+<div id='container'>
     {pokemon ? (
       <Pokemon array={pokemonArray}/>
     ) : (
       <div>no pokemon for {index}</div>
     )}
-  </div>
+</div>
+
+</>
 );
 }
 
