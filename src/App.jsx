@@ -70,8 +70,8 @@ function PokemonBuilder(name,id,sprite, props)
 
 function fillArray(){ 
   
-
-  for(let i = 1; i < 5; i++)
+  setPokemonArray([]);
+  for(let i = 1; i < 9; i++)
   {
 
     let randomId = Math.floor(Math.random() * 151 - 1 + 1)
