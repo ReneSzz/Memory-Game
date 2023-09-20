@@ -78,6 +78,7 @@ const URL = `https://pokeapi.co/api/v2/pokemon/3`
 function fillArray(){ 
   
   setPokemonArray([]);
+  setShow(false);
   for(let i = 1; i < 9; i++)
   {
 
