@@ -5,59 +5,66 @@ import './App.css'
 
 
  function App() {
-  let [index, setIndex] = useState(0);
+let [index, setIndex] = useState(0);
 const URL = `https://pokeapi.co/api/v2/pokemon/3`
- let [spriteBack, setSpriteBack] = useState('');
- let [name, setName] = useState('');
  let [pokemonArray, setPokemonArray] = useState([]);
  let [pokemon, setPokemon] = useState(null);
  const [results, setResults] = useState([]);
- const controller = new AbortController;
- 
+ const [show,setShow] = useState(false);
 
-function PokemonBuilder(name,id,sprite, props)
-{
-  return <> 
-   <h1 {...props}>{name}</h1>
-<h2> {id}</h2>
-<img src={sprite}></img> 
-  </>
-}
+ function displayChange()
+ {
+  if(show === false) setShow(true);
+  else setShow(false);
+
+ }
+
+ class PokemonClass {
+  constructor(sprite)
+  {
+    this.sprite = sprite;
+  }
+  count = 0;
+
+  static countIncrease()
+  {
+  }
+ }
 
  function Pokemon({array, props }) {
-
-  // array.map((pokemon) => {
-  //   console.log(pokemon)
-  //   console.log(pokemon.id)
-    
-    
-  // })
   return( 
     <> 
-    <div> 
+     
       {array.map((pokemon) =>{
-        return <div className='card'>
+         pokemon.isClicked = false; 
+         pokemon.click = () => {
+           if(pokemon.isClicked===true) setShow(true);
+           else if(pokemon.isClicked===false) pokemon.isClicked = true;
+          
+         }
+        
+        return (
+          
+        
+          // Next step needed is to create new pokemon objects with contain just the sprite and a property that changes based on if theirs has been clicked or not.
+          !show && <div onClick={() => pokemon.click()} className='card'>
+
+      
+       
         
         <img src={pokemon.sprites.front_default}></img>
         </div>
-
+         )
        
       }
       )}
-
-
-    {/* <h1>{pokemon.name}</h1>
-    <img src={pokemon.sprites.front_default}></img> */}
-
-    </div>
-  
     
     </>
       );
 }
 
 
-   async function getPokemon(id = 4)
+   async function getPokemon(id)
    {
      
       let response = await fetch(`https://pokeapi.co/api/v2/pokemon/`+ id);
@@ -82,6 +89,17 @@ function fillArray(){
   // getPokemon(5).then(json => setPokemonArray(prevState => ([...prevState, json])));  
   // getPokemon(6).then(json => setPokemonArray(prevState => ([...prevState, json])));  
   getPokemon(6).then(json => setPokemon(json));
+  // pokemonArray.forEach((element) => 
+  // {
+  //   element.isClicked = false; 
+  //   element.click = () => {
+  //     console.log("cool");
+  //     if(element.isClicked===true) setShow(True);
+  //     else if(element.isClicked===false) element.isClicked = true;
+     
+  //   }
+  
+  // })
  
 
 }
