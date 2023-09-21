@@ -111,12 +111,7 @@ function fillArray(){
 
   return (
   <>
-    <button type="button" onClick={() => console.log(pokemonArray)}>
-      Next
-    </button>
-    <button type="button" onClick={() => fillArray()}>
-      fill
-    </button>
+   
 
 <div id='container'>
     {pokemon ? (
@@ -126,6 +121,12 @@ function fillArray(){
     )}
 </div>
 
+<button type="button" onClick={() => console.log(pokemonArray)}>
+      Next
+    </button>
+    <button type="button" onClick={() => fillArray()}>
+      fill
+    </button>
 </>
 );
 }
