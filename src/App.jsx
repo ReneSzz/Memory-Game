@@ -11,37 +11,36 @@ const URL = `https://pokeapi.co/api/v2/pokemon/3`
  let [pokemon, setPokemon] = useState(null);
  const [results, setResults] = useState([]);
  const [show,setShow] = useState(false);
+ let shuffleArray = [];
 
- function displayChange()
- {
-  if(show === false) setShow(true);
-  else setShow(false);
 
- }
+function AddProperties(array)
+{
 
- class PokemonClass {
-  constructor(sprite)
+  array.map((pokemon) => 
   {
-    this.sprite = sprite;
-  }
-  count = 0;
+    pokemon.isClicked = false; 
+         
+    pokemon.click = () => {
+     if(pokemon.isClicked===true) setShow(true);
+     else if(pokemon.isClicked===false) 
+     {
+       pokemon.isClicked = true;
+       ShuffleArray();
+     }
+     }
+  })
+ 
+}
 
-  static countIncrease()
-  {
-  }
- }
 
  function Pokemon({array, props }) {
+  
+  
+  
   return( 
     <> 
-     
       {array.map((pokemon) =>{
-         pokemon.isClicked = false; 
-         pokemon.click = () => {
-           if(pokemon.isClicked===true) setShow(true);
-           else if(pokemon.isClicked===false) pokemon.isClicked = true;
-          
-         }
         
         return (
           
@@ -86,27 +85,23 @@ function fillArray(){
     getPokemon(randomId).then(json => setPokemonArray(prevState => ([...prevState, json])));   
 
   }
-  // getPokemon().then(json => setPokemonArray(prevState => ([...prevState, json])));   
-  // getPokemon(5).then(json => setPokemonArray(prevState => ([...prevState, json])));  
-  // getPokemon(6).then(json => setPokemonArray(prevState => ([...prevState, json])));  
   getPokemon(6).then(json => setPokemon(json));
-  // pokemonArray.forEach((element) => 
-  // {
-  //   element.isClicked = false; 
-  //   element.click = () => {
-  //     console.log("cool");
-  //     if(element.isClicked===true) setShow(True);
-  //     else if(element.isClicked===false) element.isClicked = true;
-     
-  //   }
-  
-  // })
- 
 
 }
 
+function ShuffleArray()
+{
+ 
+const tempArray = pokemonArray.map(pokemon => ({...pokemon}));
+  for (let i = tempArray.length - 1; i > 0 ; i--)
+  {
+    const j = Math.floor(Math.random()* (i + 1));
+    [tempArray[i], tempArray[j]] = [tempArray[j], tempArray[i]];
+  }
+  setPokemonArray(tempArray);
+  console.log(pokemonArray);
 
-
+}
 
 
   return (
@@ -121,10 +116,12 @@ function fillArray(){
     )}
 </div>
 
-<button type="button" onClick={() => console.log(pokemonArray)}>
+<button type="button" onClick={() => AddProperties(pokemonArray)}>
       Next
     </button>
-    <button type="button" onClick={() => fillArray()}>
+    <button type="button" onClick={() => {
+    fillArray() 
+  }}>
       fill
     </button>
 </>
