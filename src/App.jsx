@@ -102,7 +102,12 @@ const tempArray = pokemonArray.map(pokemon => ({...pokemon}));
   console.log(pokemonArray);
 
 }
-
+useEffect(() => {
+  const timer = setTimeout(() => {
+    fillArray()
+  }, 100);
+  return () => clearTimeout(timer);
+}, []);
 
   return (
   <>
