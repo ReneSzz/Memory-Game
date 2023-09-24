@@ -10,6 +10,7 @@ import './App.css'
  let [pokemon, setPokemon] = useState(null);
  const [show,setShow] = useState(false);
  const [start, setStart] = useState(false);
+ let [score, setScore] = useState(0);
 
 
 function AddProperties(array)
@@ -19,9 +20,14 @@ function AddProperties(array)
     pokemon.isClicked = false; 
          
     pokemon.click = () => {
-     if(pokemon.isClicked===true) setShow(true);
+     if(pokemon.isClicked===true)
+      {
+        setShow(true);
+        setScore(0);
+      }
      else if(pokemon.isClicked===false) 
      {
+      setScore(++score);
        pokemon.isClicked = true;
        ShuffleArray();
      }
@@ -108,9 +114,10 @@ useEffect(() => {
 
   return (
   <>
-   
+   <h1>Current Score: {score}</h1>
 
 <div id='container'>
+  
     {pokemon ? (
       <Pokemon array={pokemonArray}/>
     ) : (
