@@ -80,6 +80,7 @@ function fillArray(){
   setPokemonArray([]);
   setShow(false);
   setStart(false);
+  setScore(0);
   for(let i = 1; i < 9; i++)
   {
 
@@ -125,15 +126,8 @@ useEffect(() => {
     )}
 </div>
 
-<button type="button" onClick={() => AddProperties(pokemonArray)}>
-      Next
-    </button>
-    <button type="button" onClick={() => {
-    fillArray() 
-    
-  }}>
-      fill
-    </button>
+
+    <button type="button" onClick={() => fillArray()}> Reset </button>
 </>
 );
 }
