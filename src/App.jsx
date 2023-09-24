@@ -5,19 +5,16 @@ import './App.css'
 
 
  function App() {
-let [index, setIndex] = useState(0);
-const URL = `https://pokeapi.co/api/v2/pokemon/3`
+ let [index, setindex] = useState(0);
  let [pokemonArray, setPokemonArray] = useState([]);
  let [pokemon, setPokemon] = useState(null);
- const [results, setResults] = useState([]);
  const [show,setShow] = useState(false);
- let shuffleArray = [];
+ const [start, setStart] = useState(false);
 
 
 function AddProperties(array)
 {
-
-  array.map((pokemon) => 
+    array.map((pokemon) => 
   {
     pokemon.isClicked = false; 
          
@@ -30,36 +27,34 @@ function AddProperties(array)
      }
      }
   })
- 
 }
 
 
  function Pokemon({array, props }) {
-  
-  
-  
   return( 
     <> 
-      {array.map((pokemon) =>{
-        
-        return (
-          
-        
-          // Next step needed is to create new pokemon objects with contain just the sprite and a property that changes based on if theirs has been clicked or not.
-          !show && <div onClick={() => pokemon.click()} className='card'>
-
+  
+    
+      { array.map((pokemon) =>{
+        if (array.length === 8 && start === false) {
+          AddProperties(pokemonArray);
+          setStart(true);
       
-       
-        
+        }
+        return (
+
+         
+        !show && <div onClick={() => pokemon.click()} className='card'>
         <img src={pokemon.sprites.front_default}></img>
         </div>
          )
        
-      }
-      )}
-    
+      } 
+      ) }   
     </>
+   
       );
+      
 }
 
 
@@ -78,6 +73,7 @@ function fillArray(){
   
   setPokemonArray([]);
   setShow(false);
+  setStart(false);
   for(let i = 1; i < 9; i++)
   {
 
@@ -86,7 +82,6 @@ function fillArray(){
 
   }
   getPokemon(6).then(json => setPokemon(json));
-
 }
 
 function ShuffleArray()
@@ -99,13 +94,13 @@ const tempArray = pokemonArray.map(pokemon => ({...pokemon}));
     [tempArray[i], tempArray[j]] = [tempArray[j], tempArray[i]];
   }
   setPokemonArray(tempArray);
-  console.log(pokemonArray);
 
 }
+
+
 useEffect(() => {
   const timer = setTimeout(() => {
     fillArray()
-    AddProperties(pokemonArray)
   }, 100);
   return () => clearTimeout(timer);
 }, []);
@@ -128,6 +123,7 @@ useEffect(() => {
     </button>
     <button type="button" onClick={() => {
     fillArray() 
+    
   }}>
       fill
     </button>
