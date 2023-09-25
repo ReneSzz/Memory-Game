@@ -11,6 +11,7 @@ import './App.css'
  const [show,setShow] = useState(false);
  const [start, setStart] = useState(false);
  let [score, setScore] = useState(0);
+ let [highScore, setHighScore] = useState(0);
 
 
 function AddProperties(array)
@@ -92,7 +93,7 @@ function fillArray(){
 
 function ShuffleArray()
 {
- 
+ if(score>highScore) setHighScore(score);
 const tempArray = pokemonArray.map(pokemon => ({...pokemon}));
   for (let i = tempArray.length - 1; i > 0 ; i--)
   {
@@ -115,6 +116,7 @@ useEffect(() => {
   return (
   <>
    <h1>Current Score: {score}</h1>
+   <h2>High Score : {highScore}</h2>
 
 <div id='container'>
   
