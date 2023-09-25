@@ -128,8 +128,8 @@ useEffect(() => {
 
     <button type="button" onClick={() =>{
        fillArray();
-       setScore(0)}
-       }> Reset </button>
+       setScore(0);}
+       }> Reset  Game </button>
 </>
 );
 }
