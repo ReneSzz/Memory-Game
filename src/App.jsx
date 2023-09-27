@@ -12,6 +12,7 @@ import './App.css'
  const [start, setStart] = useState(false);
  let [score, setScore] = useState(0);
  let [highScore, setHighScore] = useState(0);
+ let [gameWin, setGameWin] = useState(false);
 
 
 function AddProperties(array)
@@ -28,9 +29,16 @@ function AddProperties(array)
       }
      else if(pokemon.isClicked===false) 
      {
-      setScore(++score);
+
+       setScore(++score);
        pokemon.isClicked = true;
        ShuffleArray();
+       if(score === 8)
+       {
+        setGameWin(true);
+        setShow(true);
+        setScore(0);
+       }
      }
      }
   })
@@ -115,22 +123,39 @@ useEffect(() => {
 
   return (
   <>
-   <h1>Current Score: {score}</h1>
-   <h2>High Score : {highScore}</h2>
+
+
 
 <div id='container'>
-  
+
+
+
     {pokemon ? (
       <Pokemon array={pokemonArray}/>
     ) : (
       <div>no pokemon for {index}</div>
     )}
 </div>
+  
+{gameWin ? (
+      
+      <h1>You WIN!</h1>
+     
+   
+   ) :  (
+     <>
+
+     <h1>Current Score: {score}</h1>
+     <h2>High Score : {highScore}</h2>
+     </>
+   )}
 
 
     <button type="button" onClick={() =>{
        fillArray();
-       setScore(0);}
+       setScore(0);
+       setGameWin(false);}
+
        }> Reset  Game </button>
 </>
 );
