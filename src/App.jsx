@@ -3,7 +3,6 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
-
  function App() {
  let [index, setindex] = useState(0);
  let [pokemonArray, setPokemonArray] = useState([]);
@@ -44,7 +43,6 @@ function AddProperties(array)
   })
 }
 
-
  function Pokemon({array, props }) {
   return( 
     <> 
@@ -72,7 +70,6 @@ function AddProperties(array)
       
 }
 
-
    async function getPokemon(id)
    {
      
@@ -96,6 +93,7 @@ function fillArray(){
     getPokemon(randomId).then(json => setPokemonArray(prevState => ([...prevState, json])));   
 
   }
+  // displays pokemon
   getPokemon(6).then(json => setPokemon(json));
 }
 
